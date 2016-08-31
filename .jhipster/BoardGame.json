@@ -1,0 +1,70 @@
+{
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "yearPublished",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "minPlayers",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maxPlayers",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "playingTime",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "minAge",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "minPlaytime",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maxPlaytime",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "thumbnail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "usersRated",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "avgRating",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "bayesAvgRating",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "rank",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160830135442",
+  "entityTableName": "board_game",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no"
+}

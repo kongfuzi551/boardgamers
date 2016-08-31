@@ -1,0 +1,101 @@
+<div>
+    <h2>Board Games</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="board-game.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs" >
+                        Create new Board Game
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Name</span></th>
+                    <th><span>Year Published</span></th>
+                    <th><span>Min Players</span></th>
+                    <th><span>Max Players</span></th>
+                    <th><span>Playing Time</span></th>
+                    <th><span>Min Age</span></th>
+                    <th><span>Min Playtime</span></th>
+                    <th><span>Max Playtime</span></th>
+                    <th><span>Description</span></th>
+                    <th><span>Thumbnail</span></th>
+                    <th><span>Users Rated</span></th>
+                    <th><span>Avg Rating</span></th>
+                    <th><span>Bayes Avg Rating</span></th>
+                    <th><span>Rank</span></th>
+                    <th><span>Image</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="boardGame in vm.boardGames track by boardGame.id">
+                    <td><a ui-sref="board-game-detail({id:boardGame.id})">{{boardGame.id}}</a></td>
+                    <td>{{boardGame.name}}</td>
+                    <td>{{boardGame.yearPublished}}</td>
+                    <td>{{boardGame.minPlayers}}</td>
+                    <td>{{boardGame.maxPlayers}}</td>
+                    <td>{{boardGame.playingTime}}</td>
+                    <td>{{boardGame.minAge}}</td>
+                    <td>{{boardGame.minPlaytime}}</td>
+                    <td>{{boardGame.maxPlaytime}}</td>
+                    <td>{{boardGame.description}}</td>
+                    <td>{{boardGame.thumbnail}}</td>
+                    <td>{{boardGame.usersRated}}</td>
+                    <td>{{boardGame.avgRating}}</td>
+                    <td>{{boardGame.bayesAvgRating}}</td>
+                    <td>{{boardGame.rank}}</td>
+                    <td>{{boardGame.image}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="board-game-detail({id:boardGame.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="board-game.edit({id:boardGame.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="board-game.delete({id:boardGame.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

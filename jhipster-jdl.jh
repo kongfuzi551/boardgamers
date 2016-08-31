@@ -1,0 +1,18 @@
+entity BoardGame {
+    id String,
+	name String,
+    yearPublished Integer,
+    minPlayers Integer,
+    maxPlayers Integer,
+    playingTime Integer,
+    minAge Integer,
+    minPlaytime Integer,
+    maxPlaytime Integer,
+    description String,
+    thumbnail String,
+    usersRated Integer,
+    avgRating Double,
+    bayesAvgRating Double,
+    rank Integer,
+    image String   
+}

@@ -1,0 +1,116 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myBoardGameLabel">Create or edit a Board Game</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.boardGame.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.boardGame.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.boardGame.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_yearPublished">Year Published</label>
+            <input type="number" class="form-control" name="yearPublished" id="field_yearPublished"
+                    ng-model="vm.boardGame.yearPublished"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_minPlayers">Min Players</label>
+            <input type="number" class="form-control" name="minPlayers" id="field_minPlayers"
+                    ng-model="vm.boardGame.minPlayers"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_maxPlayers">Max Players</label>
+            <input type="number" class="form-control" name="maxPlayers" id="field_maxPlayers"
+                    ng-model="vm.boardGame.maxPlayers"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_playingTime">Playing Time</label>
+            <input type="number" class="form-control" name="playingTime" id="field_playingTime"
+                    ng-model="vm.boardGame.playingTime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_minAge">Min Age</label>
+            <input type="number" class="form-control" name="minAge" id="field_minAge"
+                    ng-model="vm.boardGame.minAge"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_minPlaytime">Min Playtime</label>
+            <input type="number" class="form-control" name="minPlaytime" id="field_minPlaytime"
+                    ng-model="vm.boardGame.minPlaytime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_maxPlaytime">Max Playtime</label>
+            <input type="number" class="form-control" name="maxPlaytime" id="field_maxPlaytime"
+                    ng-model="vm.boardGame.maxPlaytime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.boardGame.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_thumbnail">Thumbnail</label>
+            <input type="text" class="form-control" name="thumbnail" id="field_thumbnail"
+                    ng-model="vm.boardGame.thumbnail"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_usersRated">Users Rated</label>
+            <input type="number" class="form-control" name="usersRated" id="field_usersRated"
+                    ng-model="vm.boardGame.usersRated"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_avgRating">Avg Rating</label>
+            <input type="number" class="form-control" name="avgRating" id="field_avgRating"
+                    ng-model="vm.boardGame.avgRating"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_bayesAvgRating">Bayes Avg Rating</label>
+            <input type="number" class="form-control" name="bayesAvgRating" id="field_bayesAvgRating"
+                    ng-model="vm.boardGame.bayesAvgRating"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_rank">Rank</label>
+            <input type="number" class="form-control" name="rank" id="field_rank"
+                    ng-model="vm.boardGame.rank"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_image">Image</label>
+            <input type="text" class="form-control" name="image" id="field_image"
+                    ng-model="vm.boardGame.image"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
