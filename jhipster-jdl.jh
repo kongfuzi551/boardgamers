@@ -16,3 +16,6 @@ entity BoardGame {
     rank Integer,
     image String   
 }
+
+// Set pagination options
+paginate BoardGame with infinite-scroll

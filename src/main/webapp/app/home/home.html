@@ -1,7 +1,6 @@
 <div ng-cloak>
     <div class="row">
-        <div class="col-md-8">
-
+        <div class="col-md-12">
             <div ng-switch="vm.isAuthenticated()">
                 <!--<div class="alert alert-success" ng-switch-when="true">-->
                 <!--You are logged in as user "{{vm.account.login}}".-->
@@ -61,16 +60,29 @@
                     <!--{{boardGame.image}}-->
 
 
-                    <p class="lead">Top Rated</p>
-                    <div>
-                        <div class="col-lg-2 col-smd-4"
+                    <p class="lead">Most Popular</p>
+                    <div class="row" infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                        <div class="col-lg-3"
                              ng-repeat="boardGame in vm.boardGames track by boardGame.id">
-                            <div>
-                                <span>{{boardGame.name}} ({{boardGame.yearPublished}})</span>
-                                <span>{{boardGame.avgRating}}</span>
+                            <div class="darken" ng-mouseover="vm.actions = $index" ng-mouseleave="vm.actions = -1"  style="margin-top:10px">
+                                <div style="col-lg-12" style="height:100px;">
+                                    <span
+                                        style="font-weight:bold;width:50px;min-height:100px;">{{boardGame.name}} </span>
+                                    <div>
+                                        <span>({{boardGame.yearPublished}})</span>
+                                        <span>{{boardGame.avgRating}}</span>
+                                    </div>
+                                </div>
+                                <div style="position:relative">
+                                    <a ui-sref="board-game-detail({id:boardGame.id})">
+                                    <img class="col-lg-12" style="height:200px;"
+                                         ng-src="{{boardGame.image}}"/>
+                                    </a>
+                                </div>
                             </div>
-                            <div>
-                                <img ng-src="{{boardGame.thumbnail}}"/>
+                            <div class="darken" ng-show="vm.actions == $index" style="z-index:1;position:absolute;bottom: 15px;left:60px">
+                                <img src="http://findicons.com/files/icons/2118/nuvola/128/package_games_board.png" style="width:50px;height:50px"/>
+                                <img src="http://www.clker.com/cliparts/x/n/7/m/p/g/check-mark-in-white-md.png" style="width:30px;height:30px;"/>
                             </div>
                         </div>
                     </div>
@@ -83,7 +95,6 @@
 
 
         </div>
-
 
     </div>
 </div>

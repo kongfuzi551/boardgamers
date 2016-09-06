@@ -62,9 +62,9 @@
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160830135442",
+  "changelogDate": "20160905123942",
   "entityTableName": "board_game",
   "dto": "no",
-  "pagination": "no",
+  "pagination": "infinite-scroll",
   "service": "no"
 }

@@ -5,9 +5,9 @@
         .module('boardGamesApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', 'BoardGame', 'BoardGameSearch', '$state'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', 'BoardGame', 'BoardGameSearch', 'ParseLinks', 'AlertService', '$state'];
 
-    function HomeController ($scope, Principal, LoginService, BoardGame, BoardGameSearch, $state) {
+    function HomeController ($scope, Principal, LoginService, BoardGame, BoardGameSearch,  ParseLinks, AlertService, $state) {
         var vm = this;
 
         vm.account = null;
@@ -17,9 +17,20 @@
 
         // Board game
         vm.boardGames = [];
-        vm.search = search;
+        vm.loadPage = loadPage;
+        vm.page = 0;
+        vm.links = {
+           last: 0
+        };
+        vm.predicate = 'usersRated';
+        vm.reset = reset;
+        vm.reverse = false;
+        vm.clear = clear;
         vm.loadAll = loadAll;
+        vm.search = search;
+        vm.showActions = showActions;
 
+        vm.actions = -1;
 
         getAccount();
         loadAll();
@@ -27,6 +38,10 @@
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });
+
+        function showActions() {
+            vm.actions = true;
+        }
 
         function getAccount() {
             Principal.identity().then(function(account) {
@@ -38,20 +53,85 @@
             $state.go('register');
         }
 
-        function loadAll() {
-            BoardGame.query(function(result) {
-            vm.boardGames = result;
-            });
+       function loadPage(page) {
+            vm.page = page;
+            loadAll();
         }
 
-        function search () {
-            if (!vm.searchQuery) {
-                 return vm.loadAll();
+        function loadAll () {
+            if (vm.currentSearch) {
+                BoardGameSearch.query({
+                    query: vm.currentSearch,
+                    page: vm.page,
+                    size: 20,
+                    sort: sort()
+                }, onSuccess, onError);
+            } else {
+                BoardGame.query({
+                    page: vm.page,
+                    size: 20,
+                    sort: sort()
+                }, onSuccess, onError);
+            }
+            function sort() {
+                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                if (vm.predicate !== 'id') {
+                    result.push('id');
+                }
+                return result;
             }
 
-            BoardGameSearch.query({query: vm.searchQuery}, function(result) {
-                vm.boardGames = result;
-            });
-        }    }
+            function onSuccess(data, headers) {
+                vm.links = ParseLinks.parse(headers('link'));
+                vm.totalItems = headers('X-Total-Count');
+                for (var i = 0; i < data.length; i++) {
+                    vm.boardGames.push(data[i]);
+                }
+            }
+
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
+
+        function reset () {
+            vm.page = 0;
+            vm.boardGames = [];
+            loadAll();
+        }
+
+          function clear () {
+                    vm.boardGames = [];
+                    vm.links = null;
+                    vm.page = 0;
+                    vm.predicate = 'id';
+                    vm.reverse = true;
+                    vm.searchQuery = null;
+                    vm.currentSearch = null;
+                    vm.loadAll();
+                }
+
+                function search (searchQuery) {
+                    if (!searchQuery){
+                        return vm.clear();
+                    }
+                    vm.boardGames = [];
+                    vm.links = null;
+                    vm.page = 0;
+                    vm.predicate = '_score';
+                    vm.reverse = false;
+                    vm.currentSearch = searchQuery;
+                    vm.loadAll();
+                }
+    }
 
 })();
+
+// IVR: Darken image
+//$('.darken').hover(function() {
+//    $(this).find('img').fadeTo(500, 0.5);
+//}, function() {
+//    $(this).find('img').fadeTo(500, 1);
+//});
+
+

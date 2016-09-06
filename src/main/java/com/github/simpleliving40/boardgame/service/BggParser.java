@@ -24,7 +24,6 @@ public class BggParser extends DefaultHandler {
     private static final Logger log = LoggerFactory.getLogger(BggParser.class);
 
     public BoardGame parse(String filename) throws IOException, SAXException {
-        filename = "src/test/resources/import/" + filename;
         BoardGame boardGame = new BoardGame();
         try {
 
@@ -51,7 +50,8 @@ public class BggParser extends DefaultHandler {
                         Element eElement = (Element) child;
                         switch (eElement.getNodeName()) {
                             case "name":
-                                boardGame.setName(eElement.getAttribute("value"));
+                                if (eElement.getAttribute("type").equals("primary"))
+                                    boardGame.setName(eElement.getAttribute("value"));
                                 break;
                             case "yearpublished":
                                 boardGame.setYearPublished(Integer.parseInt(eElement.getAttribute("value")));

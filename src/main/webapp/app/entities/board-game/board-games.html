@@ -34,27 +34,27 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr>
-                    <th><span>ID</span></th>
-                    <th><span>Name</span></th>
-                    <th><span>Year Published</span></th>
-                    <th><span>Min Players</span></th>
-                    <th><span>Max Players</span></th>
-                    <th><span>Playing Time</span></th>
-                    <th><span>Min Age</span></th>
-                    <th><span>Min Playtime</span></th>
-                    <th><span>Max Playtime</span></th>
-                    <th><span>Description</span></th>
-                    <th><span>Thumbnail</span></th>
-                    <th><span>Users Rated</span></th>
-                    <th><span>Avg Rating</span></th>
-                    <th><span>Bayes Avg Rating</span></th>
-                    <th><span>Rank</span></th>
-                    <th><span>Image</span></th>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="yearPublished"><span>Year Published</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="minPlayers"><span>Min Players</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="maxPlayers"><span>Max Players</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="playingTime"><span>Playing Time</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="minAge"><span>Min Age</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="minPlaytime"><span>Min Playtime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="maxPlaytime"><span>Max Playtime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="thumbnail"><span>Thumbnail</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="usersRated"><span>Users Rated</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="avgRating"><span>Avg Rating</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bayesAvgRating"><span>Bayes Avg Rating</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="rank"><span>Rank</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="image"><span>Image</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="boardGame in vm.boardGames track by boardGame.id">
                     <td><a ui-sref="board-game-detail({id:boardGame.id})">{{boardGame.id}}</a></td>
                     <td>{{boardGame.name}}</td>
