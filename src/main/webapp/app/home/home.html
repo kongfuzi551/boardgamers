@@ -64,7 +64,8 @@
                     <div class="row" infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                         <div class="col-lg-3"
                              ng-repeat="boardGame in vm.boardGames track by boardGame.id">
-                            <div class="darken" ng-mouseover="vm.actions = $index" ng-mouseleave="vm.actions = -1"  style="margin-top:10px">
+                            <!--<div class="darken" ng-mouseover="vm.actions = $index" ng-mouseleave="vm.actions = -1"  style="margin-top:10px">-->
+                            <div ng-mouseover="vm.mouseOnGame($index)" ng-mouseleave="vm.mouseOutGame()"  style="margin-top:10px">
                                 <div style="col-lg-12" style="height:100px;">
                                     <span
                                         style="font-weight:bold;width:50px;min-height:100px;">{{boardGame.name}} </span>
@@ -73,17 +74,26 @@
                                         <span>{{boardGame.avgRating}}</span>
                                     </div>
                                 </div>
-                                <div style="position:relative">
+                                <div class="darken" style="position:relative">
                                     <a ui-sref="board-game-detail({id:boardGame.id})">
                                     <img class="col-lg-12" style="height:200px;"
-                                         ng-src="{{boardGame.image}}"/>
+                                         ng-src="{{boardGame.thumbnail}}"/>
                                     </a>
                                 </div>
+                                <!-- Actions: WantToPlay & Own -->
+                                <div ng-show="vm.actions == $index" style="z-index:1;position:absolute;bottom: 15px;left:60px">
+                                    <img ng-if="vm.userWantsToPlay[$index] == null || vm.userWantsToPlay[$index] == false" ng-click="vm.setWantToPlay($index)"
+                                         src="content/images/dice_white.png" style="width:50px;height:50px; outline: none;"/>
+                                    <img ng-if="vm.userWantsToPlay[$index] == true" ng-click="vm.setWantToPlay($index)"
+                                         src="content/images/dice_yellow.png" style="width:50px;height:50px; outline: none;"/>
+
+                                    <img ng-if="vm.userOwns[$index] == null || vm.userOwns[$index] == false" ng-click="vm.setOwnership($index)"
+                                         src="content/images/check_white.png" style="width:30px;height:30px; outline: none;"/>
+                                    <img ng-if="vm.userOwns[$index] == true" ng-click="vm.setOwnership($index)"
+                                         src="content/images/check_green.png" style="width:30px;height:30px; outline: none;"/>
+                                </div>
                             </div>
-                            <div class="darken" ng-show="vm.actions == $index" style="z-index:1;position:absolute;bottom: 15px;left:60px">
-                                <img src="http://findicons.com/files/icons/2118/nuvola/128/package_games_board.png" style="width:50px;height:50px"/>
-                                <img src="http://www.clker.com/cliparts/x/n/7/m/p/g/check-mark-in-white-md.png" style="width:30px;height:30px;"/>
-                            </div>
+
                         </div>
                     </div>
             <span ng-if="vm.boardGames.length === 0">

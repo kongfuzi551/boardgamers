@@ -17,6 +17,9 @@
 
         // Board game
         vm.boardGames = [];
+        vm.userWantsToPlay = [];
+        vm.userOwns = [];
+
         vm.loadPage = loadPage;
         vm.page = 0;
         vm.links = {
@@ -28,7 +31,10 @@
         vm.clear = clear;
         vm.loadAll = loadAll;
         vm.search = search;
-        vm.showActions = showActions;
+        vm.mouseOnGame = mouseOnGame;
+        vm.mouseOutGame = mouseOutGame;
+        vm.setWantToPlay = setWantToPlay;
+        vm.setOwnership = setOwnership;
 
         vm.actions = -1;
 
@@ -39,8 +45,28 @@
             getAccount();
         });
 
-        function showActions() {
-            vm.actions = true;
+        function setWantToPlay(index){
+            console.log("Want to play: " , vm.boardGames[index].name);
+            if (vm.userWantsToPlay[index])
+                vm.userWantsToPlay[index] = false;
+            else
+                vm.userWantsToPlay[index] = true;
+        }
+
+        function setOwnership(index){
+            console.log("User owns: " , vm.boardGames[index].name);
+            if (vm.userOwns[index])
+                vm.userOwns[index] = false;
+            else
+                vm.userOwns[index] = true;
+        }
+
+        function mouseOnGame(index) {
+            vm.actions = index;
+        }
+
+        function mouseOutGame() {
+            vm.actions = -1;
         }
 
         function getAccount() {
